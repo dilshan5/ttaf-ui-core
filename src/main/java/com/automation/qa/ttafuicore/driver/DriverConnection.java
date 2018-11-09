@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 /**
+ * This class is for set up the driver connection
  * Created by DilshanF on 10/23/2018.
  */
 public class DriverConnection {
