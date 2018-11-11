@@ -2,6 +2,7 @@ package com.automation.qa.ttafuicore.util;
 
 import java.net.URL;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 /**
  * Constant.java - properties accessed as constants through out the application.( Global Access)
@@ -9,7 +10,7 @@ import java.util.Properties;
  * Created by DilshanF on 10/23/2018.
  */
 public class Constant {
-
+    private static final Logger LOGGER = Logger.getLogger(String.valueOf(Constant.class));
     private static final String DRIVER_TYPE_KEY = "driverType";
     private static final String DRIVER_LOCATION_KEY = "driverLocation";
     private static final String BROWSER_NAME_KEY = "browser";

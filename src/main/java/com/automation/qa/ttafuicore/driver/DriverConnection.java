@@ -4,10 +4,15 @@ import com.automation.qa.ttafuicore.util.Constant;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -44,10 +49,25 @@ public class DriverConnection {
      * @throws Exception
      */
     private static void setWebDriverLocation() throws Exception {
-        try {
-            System.setProperty(Constant.DRIVER_TYPE, Constant.DRIVER_LOCATION);
-        } catch (Throwable e) {
-            throw new Exception(e.getCause().toString());
+        URL driverLocation = Constant.class.getClassLoader().getResource("drivers/");
+        switch (Constant.BROWSER_NAME) {
+            case "chrome":
+                try {
+                    System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver.exe");
+                    break;
+                } catch (Throwable e) {
+                    throw new Exception(e.getCause().toString());
+                }
+            case "firefox":
+                try {
+                    System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver.exe");
+                    break;
+                } catch (Throwable e) {
+                    throw new Exception(e.getCause().toString());
+                }
+            default:
+                System.exit(1);
+                break;
         }
     }
 
@@ -68,6 +88,23 @@ public class DriverConnection {
                     capability = DesiredCapabilities.chrome();
                     capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
                     capability.setCapability(ChromeOptions.CAPABILITY, options);
+                    System.out.println("Success : setDesiredCapabilities");
+                    break;
+                } catch (Throwable e) {
+                    throw new Exception(e.getCause().toString());
+                }
+            case "firefox":
+                try {
+                    FirefoxProfile firefoxProfile = new FirefoxProfile();
+                    firefoxProfile.setPreference("enableNativeEvents", true);
+                    firefoxProfile.setAssumeUntrustedCertificateIssuer(true);
+                    firefoxProfile.setPreference("browser.download.folderList", 2);
+                    firefoxProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
+                    capability = DesiredCapabilities.firefox();
+                    //still run your existing tests on Firefox 46+ without modifying your tests.
+                    capability.setCapability("marionette", true);
+                    capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+                    capability.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
                     System.out.println("Success : setDesiredCapabilities");
                     break;
                 } catch (Throwable e) {
