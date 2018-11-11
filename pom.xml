@@ -12,8 +12,7 @@
         <!-- github server corresponds to entry in ~/.m2/settings.xml -->
         <github.global.server>github</github.global.server>
     </properties>
-
-
+    
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -48,7 +47,7 @@
                 <version>2.8.1</version>
                 <inherited>true</inherited>
                 <configuration>
-                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}\mvn-repo</altDeploymentRepository>
                     <updateReleaseInfo>true</updateReleaseInfo>
                 </configuration>
             </plugin>
@@ -59,7 +58,7 @@
                 <configuration>
                     <message>Maven artifacts for ${project.artifactId} ${project.version}</message>  <!-- git commit message -->
                     <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
+                    <outputDirectory>${project.build.directory}\mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
                     <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
                     <includes><include>**/*</include></includes>
                     <repositoryName>ttaf-ui-core</repositoryName>      <!-- github repo name -->
@@ -88,7 +87,7 @@
         <repository>
             <id>internal.repo</id>
             <name>Temporary Staging Repository</name>
-            <url>file://${project.build.directory}/mvn-repo</url>
+            <url>file://${project.build.directory}\mvn-repo</url>
         </repository>
     </distributionManagement>
     <ciManagement>
