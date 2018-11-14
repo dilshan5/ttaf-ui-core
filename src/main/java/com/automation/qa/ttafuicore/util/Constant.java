@@ -16,6 +16,10 @@ public class Constant {
     private static final String BROWSER_NAME_KEY = "browser";
     private static final String TIMEOUT_IMPLICIT_KEY = "implicitWaitTime";
     private static final String URL_KEY = "url";
+    private static final String BROWSER_VERSION_KEY = "browserVersionmvn ";
+    private static final String PLATFORM_KEY = "platform";
+    private static final String HUBURL_KEY = "hubURL";
+    private static final String GRID_MODE_KEY = "grid-mode";
 
     private static Properties properties;
     public static String DRIVER_TYPE;
@@ -23,6 +27,10 @@ public class Constant {
     public static String BROWSER_NAME;
     public static int TIMEOUT_IMPLICIT;
     public static String URL;
+    public static String BROWSER_VERSION;
+    public static String PLATFORM;
+    public static String hubURL;
+    public static String GRID_MODE;
 
     static {
         try {
@@ -53,6 +61,10 @@ public class Constant {
             BROWSER_NAME = (properties.getProperty(BROWSER_NAME_KEY) == null ? "chrome" : properties.getProperty(BROWSER_NAME_KEY));
             URL = properties.getProperty(URL_KEY);
             TIMEOUT_IMPLICIT = Integer.parseInt(properties.getProperty(TIMEOUT_IMPLICIT_KEY));
+            BROWSER_VERSION = properties.getProperty(BROWSER_VERSION_KEY);
+            PLATFORM = properties.getProperty(PLATFORM_KEY);
+            hubURL = properties.getProperty(HUBURL_KEY);
+            GRID_MODE = properties.getProperty(GRID_MODE_KEY).toLowerCase();
         } catch (Exception e) {
         }
 
