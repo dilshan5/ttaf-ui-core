@@ -1,8 +1,7 @@
 package com.automation.qa.ttafuicore.util;
 
 import com.automation.qa.ttafuicore.driver.DriverManager;
-import com.automation.qa.ttafuicore.driver.LocalDriverFactory;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import com.automation.qa.ttafuicore.driver.DriverFactory;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
@@ -32,11 +31,8 @@ public class WebDriverListener implements IInvokedMethodListener {
             LOGGER.info("Execution Browser set as: " + browserName);
             LOGGER.info("Execution Browser Version set as: " + browserVersion);
             LOGGER.info("Execution Platform set as: " + platform);
-            LOGGER.info("Selenium Grid is: " + Constant.GRID_MODE);
-            LOGGER.info("Selenium Grid url: " + Constant.hubURL);
 
-            RemoteWebDriver driver = LocalDriverFactory.createInstance(browserName, browserVersion, platform);
-            DriverManager.setWebDriver(driver);
+            DriverFactory.createInstance(browserName, browserVersion, platform);
             LOGGER.info("Done! Created " + Constant.BROWSER_NAME + " driver!");
 
         } else {
@@ -64,15 +60,8 @@ public class WebDriverListener implements IInvokedMethodListener {
                 System.out.println("afterInvocation exception:\n" + ex.getMessage());
                 ex.printStackTrace();
             } finally {
-                // close the browser
-                RemoteWebDriver driver = DriverManager.getDriver();
-                if (driver != null) {
-                    driver.quit();
-                    LOGGER.info("TTAF MESSAGE: Close the browser");
-                }
             }
         }
-        DriverManager.driver.set(null);
         LOGGER.info("END: com.automation.qa.ttafuicore.util.WebDriverListener.afterInvocation");
     }
 }

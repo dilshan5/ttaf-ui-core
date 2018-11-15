@@ -14,19 +14,19 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 /**
  * Created by DilshanF on 11/14/2018.
  */
-public class LocalDriverFactory {
-    private static final Logger LOGGER = Logger.getLogger(String.valueOf(LocalDriverFactory.class));
+public class DriverFactory {
+    private static final Logger LOGGER = Logger.getLogger(String.valueOf(DriverFactory.class));
 
     protected static DesiredCapabilities capability;
     protected static String node;
 
-    public static RemoteWebDriver createInstance(String browserName, String browserVersion, String platform) {
-        RemoteWebDriver driver = null;
+    public static void createInstance(String browserName, String browserVersion, String platform) {
         browserName = (browserName != null) ? browserName : "chrome";
 
         setDesiredCapabilities(browserName);//set browser capabilities
@@ -41,38 +41,38 @@ public class LocalDriverFactory {
             node = Constant.hubURL;
             capability.setVersion(browserVersion);
             try {
-                driver = new RemoteWebDriver(new URL(node), capability);
+                DriverManager.driver.set( new RemoteWebDriver(new URL(node), capability));
+                LOGGER.info("Selenium Grid is: " + Constant.GRID_MODE);
+                LOGGER.info("Selenium Grid url: " + Constant.hubURL);
                 LOGGER.info("TTAF MESSAGE: Successfully set up Selenium grid.");
             } catch (Exception e) {
+                LOGGER.info("TTAF MESSAGE: Failed to set up Selenium grid.");
             }
         } else {
             setWebDriverLocation(browserName);
-            driver = createLocalInstance(browserName);
+            createLocalInstance(browserName);
         }
-
-        return driver;
+        setWebDriver();
     }
 
-    private static RemoteWebDriver createLocalInstance(String browserName) {
-        RemoteWebDriver driver;
+    private static void createLocalInstance(String browserName) {
         switch (browserName) {
             case "chrome":
-                driver = new ChromeDriver(capability);
+                DriverManager.driver.set(new ChromeDriver(capability));
                 break;
             case "firefox":
-                driver = new FirefoxDriver(capability);
+                DriverManager.driver.set(new FirefoxDriver(capability));
                 break;
             case "safari":
-                driver = new SafariDriver(capability);
+                DriverManager.driver.set(new SafariDriver(capability));
                 break;
             case "ie":
-                driver = new InternetExplorerDriver(capability);
+                DriverManager.driver.set(new InternetExplorerDriver(capability));
                 break;
             default:
-                driver = new ChromeDriver();
+                DriverManager.driver.set(new ChromeDriver(capability));
                 break;
         }
-        return driver;
     }
 
     /**
@@ -118,7 +118,23 @@ public class LocalDriverFactory {
                 firefoxProfile.setPreference("enableNativeEvents", true);
                 firefoxProfile.setAssumeUntrustedCertificateIssuer(true);
                 firefoxProfile.setPreference("browser.download.folderList", 2);
+                //firefoxProfile.setPreference("browser.download.dir", DOWNLOAD_PATH);
+                firefoxProfile.setPreference("browser.download.manager.alertOnEXEOpen", false);
+                firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/msword, application/csv, application/ris, text/csv, image/png, application/pdf, text/html, text/plain, application/zip, application/x-zip, application/x-zip-compressed, application/download, application/octet-stream");
+                firefoxProfile.setPreference("browser.download.manager.showWhenStarting", false);
+                firefoxProfile.setPreference("browser.download.manager.focusWhenStarting", false);
+                firefoxProfile.setPreference("browser.download.useDownloadDir", true);
                 firefoxProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
+                firefoxProfile.setPreference("browser.download.manager.alertOnEXEOpen", false);
+                firefoxProfile.setPreference("browser.download.manager.closeWhenDone", true);
+                firefoxProfile.setPreference("browser.download.manager.showAlertOnComplete", false);
+                firefoxProfile.setPreference("browser.download.manager.useWindow", false);
+                firefoxProfile.setPreference("services.sync.prefs.sync.browser.download.manager.showWhenStarting", false);
+                firefoxProfile.setPreference("pdfjs.disabled", true);
+                firefoxProfile.setPreference("browser.cache.disk.enable", false);
+                firefoxProfile.setPreference("browser.cache.memory.enable", false);
+                firefoxProfile.setPreference("browser.cache.offline.enable", false);
+                firefoxProfile.setPreference("network.http.use-cache", false);
                 capability = DesiredCapabilities.firefox();
                 //still run your existing tests on Firefox 46+ without modifying your tests.
                 capability.setCapability("marionette", true);
@@ -150,7 +166,7 @@ public class LocalDriverFactory {
                 System.exit(1);
                 break;
         }
-        LOGGER.info("TTAF MESSAGE: Successfully set Browser Capabilities.");
+        LOGGER.info("TTAF MESSAGE: Successfully set Capabilities for "+browserName+" browser");
     }
 
     /**
@@ -171,6 +187,17 @@ public class LocalDriverFactory {
                 break;
         }
         LOGGER.info("TTAF MESSAGE: Successfully Set the driver locations");
+    }
+
+    /**
+     * Setup Basic WebDriver Browser Settings
+     *
+     */
+    public static void setWebDriver() {
+        DriverManager.driver.get().manage().timeouts().implicitlyWait(Constant.TIMEOUT_IMPLICIT, TimeUnit.MILLISECONDS);
+        DriverManager.driver.get().manage().window().maximize();
+        DriverManager.driver.get().manage().deleteAllCookies();
+        DriverManager.driver.get().navigate().to(Constant.URL);
     }
 
 }
