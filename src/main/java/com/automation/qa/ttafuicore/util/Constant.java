@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 /**
  * Constant.java - properties accessed as constants through out the application.( Global Access)
- *
+ * <p/>
  * Created by DilshanF on 10/23/2018.
  */
 public class Constant {
@@ -16,7 +16,7 @@ public class Constant {
     private static final String BROWSER_NAME_KEY = "browser";
     private static final String TIMEOUT_IMPLICIT_KEY = "implicitWaitTime";
     private static final String URL_KEY = "url";
-    private static final String BROWSER_VERSION_KEY = "browserVersionmvn ";
+    private static final String BROWSER_VERSION_KEY = "browserVersion";
     private static final String PLATFORM_KEY = "platform";
     private static final String HUBURL_KEY = "hubURL";
     private static final String GRID_MODE_KEY = "grid-mode";
@@ -42,6 +42,7 @@ public class Constant {
 
     /**
      * Loading  values to global variables.
+     *
      * @throws Exception
      */
     public static void loadXmlProperties() throws Exception {
