@@ -25,11 +25,6 @@
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>4.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-core</artifactId>
             <version>4.0.0</version>
         </dependency>
@@ -97,6 +92,9 @@
             <id>dilshanf</id>
             <name>Dilshan Fernando</name>
             <email>dilshan.fdo@gmail.com</email>
+            <roles>
+                <role>Owner</role>
+            </roles>
         </developer>
     </developers>
     <distributionManagement>

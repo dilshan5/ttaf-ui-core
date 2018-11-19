@@ -1,7 +1,8 @@
-package com.automation.qa.ttafuicore.util;
+package com.automation.qa.ttafuicore.listener;
 
 import com.automation.qa.ttafuicore.driver.DriverManager;
 import com.automation.qa.ttafuicore.driver.DriverFactory;
+import com.automation.qa.ttafuicore.util.Constant;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
@@ -18,7 +19,7 @@ public class WebDriverListener implements IInvokedMethodListener {
 
     @Override
     public void beforeInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
-        LOGGER.info("TTAF MESSAGE:BEGIN: com.automation.qa.ttafuicore.util.WebDriverListener.beforeInvocation");
+        LOGGER.info("TTAF MESSAGE:BEGIN: com.automation.qa.ttafuicore.listener.WebDriverListener.beforeInvocation");
         if (iInvokedMethod.isTestMethod()) {
             // get browser name specified in the TestNG XML test suite file
             String browserName = iInvokedMethod.getTestMethod().getXmlTest().getLocalParameters().get("browserName");
@@ -33,17 +34,17 @@ public class WebDriverListener implements IInvokedMethodListener {
             LOGGER.info("Execution Platform set as: " + platform);
 
             DriverFactory.createInstance(browserName, browserVersion, platform);
-            LOGGER.info("Done! Created " + Constant.BROWSER_NAME + " driver!");
+            LOGGER.info("Done! Created " + browserName + " driver!");
 
         } else {
             LOGGER.info("TTAF MESSAGE: TTAF Provided method is NOT a TestNG testMethod!!!");
         }
-        LOGGER.info("TTAF MESSAGE:END: com.automation.qa.ttafuicore.util.WebDriverListener.beforeInvocation");
+        LOGGER.info("TTAF MESSAGE:END: com.automation.qa.ttafuicore.listener.WebDriverListener.beforeInvocation");
     }
 
     @Override
     public void afterInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
-        LOGGER.info("BEGINNING: com.automation.qa.ttafuicore.util.WebDriverListener.afterInvocation");
+        LOGGER.info("BEGINNING: com.automation.qa.ttafuicore.listener.WebDriverListener.afterInvocation");
         if (iInvokedMethod.isTestMethod()) {
             try {
                 String browser = DriverManager.getBrowserInfo();
@@ -62,6 +63,6 @@ public class WebDriverListener implements IInvokedMethodListener {
             } finally {
             }
         }
-        LOGGER.info("END: com.automation.qa.ttafuicore.util.WebDriverListener.afterInvocation");
+        LOGGER.info("END: com.automation.qa.ttafuicore.listener.WebDriverListener.afterInvocation");
     }
 }
