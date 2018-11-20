@@ -1,11 +1,9 @@
 package com.automation.qa.ttafuicore.driver;
 
 import com.automation.qa.ttafuicore.util.Constant;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 /**
  * Created by DilshanF on 11/14/2018.
@@ -23,13 +21,11 @@ For more details please refer to the src link above :)
         if (driver.get() == null) {
             // this is need when running tests from IDE
             LOGGER.info("Thread has no WedDriver, creating new one");
-           DriverFactory.createInstance(Constant.BROWSER_NAME,Constant.BROWSER_VERSION,Constant.PLATFORM);
+            DriverFactory.createInstance(Constant.BROWSER_NAME, Constant.BROWSER_VERSION, Constant.PLATFORM);
         }
         LOGGER.info("Getting instance of remote driver" + driver.get().getClass());
         return driver.get();
     }
-
-
 
 
     /**

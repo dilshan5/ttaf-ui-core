@@ -1,8 +1,10 @@
 package com.automation.qa.ttafuicore.util;
 
+import org.apache.log4j.Logger;
+
 import java.net.URL;
 import java.util.Properties;
-import java.util.logging.Logger;
+
 
 /**
  * Constant.java - properties accessed as constants through out the application.( Global Access)
@@ -31,6 +33,7 @@ public class Constant {
     public static String PLATFORM;
     public static String hubURL;
     public static String GRID_MODE;
+    public static String SCENARIO_NAME;
 
     static {
         try {
@@ -66,7 +69,9 @@ public class Constant {
             PLATFORM = properties.getProperty(PLATFORM_KEY);
             hubURL = properties.getProperty(HUBURL_KEY);
             GRID_MODE = properties.getProperty(GRID_MODE_KEY).toLowerCase();
+            LOGGER.info("Set up Framework variables");
         } catch (Exception e) {
+            LOGGER.error("Error: Unable to load framework variables ", e);
         }
 
     }

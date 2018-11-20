@@ -1,8 +1,7 @@
 package com.automation.qa.ttafuicore.page;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.util.logging.Logger;
 
 
 /**

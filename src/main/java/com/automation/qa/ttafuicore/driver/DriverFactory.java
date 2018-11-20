@@ -1,6 +1,7 @@
 package com.automation.qa.ttafuicore.driver;
 
 import com.automation.qa.ttafuicore.util.Constant;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,7 +16,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
+
 
 /**
  * Created by DilshanF on 11/14/2018.
@@ -46,7 +47,7 @@ public class DriverFactory {
                 LOGGER.info("Selenium Grid url: " + Constant.hubURL);
                 LOGGER.info("TTAF MESSAGE: Successfully set up Selenium grid.");
             } catch (Exception e) {
-                LOGGER.info("TTAF MESSAGE: Failed to set up Selenium grid.");
+                LOGGER.error("TTAF MESSAGE: Failed to set up Selenium grid.");
             }
         } else {
             setWebDriverLocation(browserName);
@@ -162,7 +163,7 @@ public class DriverFactory {
                 capability.setCapability(InternetExplorerDriver.NATIVE_EVENTS, false);
                 break;
             default:
-                LOGGER.info("TTAF MESSAGE: Failed to set Browser Capabilities.");
+                LOGGER.error("TTAF MESSAGE: Failed to set Browser Capabilities.");
                 System.exit(1);
                 break;
         }
