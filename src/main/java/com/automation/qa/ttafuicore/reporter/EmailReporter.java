@@ -49,7 +49,7 @@ public class EmailReporter extends ExtentHtmlReporter {
 
         try {
             Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
-            cfg.setClassForTemplateLoading(Marker.class.getEnclosingClass(), "view");
+            cfg.setClassForTemplateLoading(Marker.class.getEnclosingClass(), "/views");
             cfg.setDefaultEncoding("UTF-8");
             Template template = cfg.getTemplate("email.ftl");
 
