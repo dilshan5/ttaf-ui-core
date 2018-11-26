@@ -173,7 +173,7 @@ public class ExtentTestNgFormatter implements ISuiteListener, ITestListener, IIn
     public void beforeInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
         if (iInvokedMethod.isTestMethod()) {
             // get browser name specified in the TestNG XML test suite file
-            String browserName = iInvokedMethod.getTestMethod().getXmlTest().getLocalParameters().get("browserName");
+ /*           String browserName = iInvokedMethod.getTestMethod().getXmlTest().getLocalParameters().get("browserName");
             String browserVersion = iInvokedMethod.getTestMethod().getXmlTest().getLocalParameters().get("browserVersion");
             String platform = iInvokedMethod.getTestMethod().getXmlTest().getLocalParameters().get("platform");
 
@@ -186,7 +186,7 @@ public class ExtentTestNgFormatter implements ISuiteListener, ITestListener, IIn
 
             DriverFactory.createInstance(browserName, browserVersion, platform);
             LOGGER.info("Done! Created " + browserName + " driver!");
-
+*/
 
         }
     }
