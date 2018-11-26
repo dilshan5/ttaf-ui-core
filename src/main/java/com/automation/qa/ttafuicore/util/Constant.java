@@ -34,6 +34,7 @@ public class Constant {
     public static String hubURL;
     public static String GRID_MODE;
     public static String SCENARIO_NAME;
+    public static String SCENARIO_NAME1;
 
     static {
         try {
