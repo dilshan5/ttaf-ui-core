@@ -12,6 +12,7 @@
         <github.global.server>github</github.global.server>
     </properties>
     <dependencies>
+        
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
