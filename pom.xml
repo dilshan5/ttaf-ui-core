@@ -6,28 +6,37 @@
 
     <groupId>com.automation.qa</groupId>
     <artifactId>ttaf-ui-core</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
-
+    <version>1.0.6-SNAPSHOT</version>
     <properties>
         <!-- github server corresponds to entry in ~/.m2/settings.xml -->
         <github.global.server>github</github.global.server>
     </properties>
-    
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.13.0</version>
+            <version>3.11.0</version>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
-            <version>1.2.5</version>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>1.2.5</version>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+<!--        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>3.1.2</version>
+            <scope>provided</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
     </dependencies>
     <build>
@@ -47,7 +56,8 @@
                 <version>2.8.1</version>
                 <inherited>true</inherited>
                 <configuration>
-                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}\mvn-repo</altDeploymentRepository>
+                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}\mvn-repo
+                    </altDeploymentRepository>
                     <updateReleaseInfo>true</updateReleaseInfo>
                 </configuration>
             </plugin>
@@ -56,13 +66,24 @@
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.12</version>
                 <configuration>
-                    <message>Maven artifacts for ${project.artifactId} ${project.version}</message>  <!-- git commit message -->
-                    <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-                    <outputDirectory>${project.build.directory}\mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-                    <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
-                    <includes><include>**/*</include></includes>
-                    <repositoryName>ttaf-ui-core</repositoryName>      <!-- github repo name -->
-                    <repositoryOwner>dilshan5</repositoryOwner>    <!-- github username  -->
+                    <message>Maven artifacts for removing Extent Reporting ${project.artifactId}
+                        ${project.version}
+                    </message>
+                    <!-- git commit message -->
+                    <noJekyll>true</noJekyll>
+                    <!-- disable webpage processing -->
+                    <outputDirectory>${project.build.directory}\mvn-repo</outputDirectory>
+                    <!-- matches distribution management repository url above -->
+                    <branch>refs/heads/mvn-repo</branch>
+                    <!-- remote branch name -->
+                    <merge>true</merge>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <repositoryName>ttaf-ui-core</repositoryName>
+                    <!-- github repo name -->
+                    <repositoryOwner>dilshan5</repositoryOwner>
+                    <!-- github username  -->
                 </configuration>
                 <executions>
                     <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
@@ -81,6 +102,9 @@
             <id>dilshanf</id>
             <name>Dilshan Fernando</name>
             <email>dilshan.fdo@gmail.com</email>
+            <roles>
+                <role>Owner</role>
+            </roles>
         </developer>
     </developers>
     <distributionManagement>

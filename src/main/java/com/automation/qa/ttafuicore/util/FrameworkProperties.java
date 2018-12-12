@@ -1,5 +1,7 @@
 package com.automation.qa.ttafuicore.util;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -7,8 +9,8 @@ import java.util.Properties;
  * Created by DilshanF on 10/23/2018.
  */
 public class FrameworkProperties {
+    private static final Logger LOGGER = Logger.getLogger(String.valueOf(FrameworkProperties.class));
     private Properties properties;
-
 
     /**
      * @param projectSettingsFile
@@ -27,8 +29,7 @@ public class FrameworkProperties {
                 e.printStackTrace();
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Configuration.properties not found at " + projectSettingsFile);
+            LOGGER.error("Configuration.properties not found at " + projectSettingsFile, e);
         }
 
         return properties;

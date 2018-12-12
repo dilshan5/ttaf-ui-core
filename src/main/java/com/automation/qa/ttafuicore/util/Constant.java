@@ -1,20 +1,27 @@
 package com.automation.qa.ttafuicore.util;
 
+import org.apache.log4j.Logger;
+
 import java.net.URL;
 import java.util.Properties;
 
+
 /**
  * Constant.java - properties accessed as constants through out the application.( Global Access)
- *
+ * <p/>
  * Created by DilshanF on 10/23/2018.
  */
 public class Constant {
-
+    private static final Logger LOGGER = Logger.getLogger(String.valueOf(Constant.class));
     private static final String DRIVER_TYPE_KEY = "driverType";
     private static final String DRIVER_LOCATION_KEY = "driverLocation";
     private static final String BROWSER_NAME_KEY = "browser";
     private static final String TIMEOUT_IMPLICIT_KEY = "implicitWaitTime";
     private static final String URL_KEY = "url";
+    private static final String BROWSER_VERSION_KEY = "browserVersion";
+    private static final String PLATFORM_KEY = "platform";
+    private static final String HUBURL_KEY = "hubURL";
+    private static final String GRID_MODE_KEY = "grid-mode";
 
     private static Properties properties;
     public static String DRIVER_TYPE;
@@ -22,6 +29,12 @@ public class Constant {
     public static String BROWSER_NAME;
     public static int TIMEOUT_IMPLICIT;
     public static String URL;
+    public static String BROWSER_VERSION;
+    public static String PLATFORM;
+    public static String hubURL;
+    public static String GRID_MODE;
+    public static String SCENARIO_NAME;
+    public static String SCENARIO_NAME1;
 
     static {
         try {
@@ -33,6 +46,7 @@ public class Constant {
 
     /**
      * Loading  values to global variables.
+     *
      * @throws Exception
      */
     public static void loadXmlProperties() throws Exception {
@@ -52,7 +66,13 @@ public class Constant {
             BROWSER_NAME = (properties.getProperty(BROWSER_NAME_KEY) == null ? "chrome" : properties.getProperty(BROWSER_NAME_KEY));
             URL = properties.getProperty(URL_KEY);
             TIMEOUT_IMPLICIT = Integer.parseInt(properties.getProperty(TIMEOUT_IMPLICIT_KEY));
+            BROWSER_VERSION = properties.getProperty(BROWSER_VERSION_KEY);
+            PLATFORM = properties.getProperty(PLATFORM_KEY);
+            hubURL = properties.getProperty(HUBURL_KEY);
+            GRID_MODE = properties.getProperty(GRID_MODE_KEY).toLowerCase();
+            LOGGER.info("Set up Framework variables");
         } catch (Exception e) {
+            LOGGER.error("Error: Unable to load framework variables ", e);
         }
 
     }
