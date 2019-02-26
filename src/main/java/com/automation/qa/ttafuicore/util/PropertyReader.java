@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
+//commit to do sample 
 public class PropertyReader {
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(PropertyReader.class));
     private static BufferedReader reader;
