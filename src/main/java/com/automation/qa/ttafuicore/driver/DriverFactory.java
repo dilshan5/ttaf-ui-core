@@ -177,10 +177,12 @@ public class DriverFactory {
         URL driverLocation = Constant.class.getClassLoader().getResource("drivers/");
         switch (browserName) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver.exe");
+               // System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "/home/dilshanf/drivers/chromedriver");
                 break;
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver.exe");
+             //   System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", "/home/dilshanf/drivers/geckodriver");
                 break;
             default:
                 LOGGER.info("TTAF MESSAGE: Failed to  Set the driver locations");
