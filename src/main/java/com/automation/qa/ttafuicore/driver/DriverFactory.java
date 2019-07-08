@@ -26,6 +26,7 @@ public class DriverFactory {
 
     protected static DesiredCapabilities capability;
     protected static String node;
+    protected static String platform;
 
     public static void createInstance(String browserName, String browserVersion, String platform) {
         browserName = (browserName != null) ? browserName : "chrome";
@@ -42,7 +43,7 @@ public class DriverFactory {
             node = Constant.hubURL;
             capability.setVersion(browserVersion);
             try {
-                DriverManager.driver.set( new RemoteWebDriver(new URL(node), capability));
+                DriverManager.driver.set(new RemoteWebDriver(new URL(node), capability));
                 LOGGER.info("Selenium Grid is: " + Constant.GRID_MODE);
                 LOGGER.info("Selenium Grid url: " + Constant.hubURL);
                 LOGGER.info("TTAF MESSAGE: Successfully set up Selenium grid.");
@@ -79,8 +80,9 @@ public class DriverFactory {
     /**
      * Set Drivers Location System Properties
      */
-    private static void setPlatform(String platform) {
-        switch (platform) {
+    private static void setPlatform(String platform_) {
+        platform = platform_;
+        switch (platform_) {
             case "windows":
                 capability.setPlatform(Platform.WINDOWS);
                 break;
@@ -167,7 +169,7 @@ public class DriverFactory {
                 System.exit(1);
                 break;
         }
-        LOGGER.info("TTAF MESSAGE: Successfully set Capabilities for "+browserName+" browser");
+        LOGGER.info("TTAF MESSAGE: Successfully set Capabilities for " + browserName + " browser");
     }
 
     /**
@@ -177,12 +179,16 @@ public class DriverFactory {
         URL driverLocation = Constant.class.getClassLoader().getResource("drivers/");
         switch (browserName) {
             case "chrome":
-               // System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver.exe");
-                System.setProperty("webdriver.chrome.driver", "/home/dilshanf/drivers/chromedriver");
+                if (platform.equals("windows"))
+                    System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver.exe");
+                else if (platform.equals("linux"))
+                    System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver");
                 break;
             case "firefox":
-             //   System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver.exe");
-                System.setProperty("webdriver.gecko.driver", "/home/dilshanf/drivers/geckodriver");
+                if (platform.equals("windows"))
+                    System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver.exe");
+                else if (platform.equals("linux"))
+                    System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver");
                 break;
             default:
                 LOGGER.info("TTAF MESSAGE: Failed to  Set the driver locations");
@@ -194,7 +200,6 @@ public class DriverFactory {
 
     /**
      * Setup Basic WebDriver Browser Settings
-     *
      */
     public static void setWebDriver() {
         DriverManager.driver.get().manage().timeouts().implicitlyWait(Constant.TIMEOUT_IMPLICIT, TimeUnit.MILLISECONDS);
