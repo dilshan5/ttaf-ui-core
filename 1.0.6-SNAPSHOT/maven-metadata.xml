@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>com.automation.qa</groupId>
+  <artifactId>ttaf-ui-core</artifactId>
+  <version>1.0.6-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20190709.112500</timestamp>
+      <buildNumber>2</buildNumber>
+    </snapshot>
+    <lastUpdated>20190709112500</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.0.6-20190709.112500-2</value>
+        <updated>20190709112500</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.0.6-20190709.112500-2</value>
+        <updated>20190709112500</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
