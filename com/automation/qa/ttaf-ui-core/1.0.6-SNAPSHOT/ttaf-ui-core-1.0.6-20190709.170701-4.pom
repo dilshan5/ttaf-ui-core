@@ -76,7 +76,7 @@
                     <!-- matches distribution management repository url above -->
                     <branch>refs/heads/mvn-repo</branch>
                     <!-- remote branch name -->
-                    <merge>true</merge>
+                    <merge>false</merge>
                     <includes>
                         <include>**/*</include>
                     </includes>
@@ -109,7 +109,7 @@
     </developers>
     <distributionManagement>
         <repository>
-            <id>internal</id>
+            <id>internal.repo</id>
             <name>Temporary Staging Repository</name>
             <url>file://${project.build.directory}\mvn-repo</url>
         </repository>
