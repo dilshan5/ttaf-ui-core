@@ -26,11 +26,11 @@ public class DriverFactory {
 
     protected static DesiredCapabilities capability;
     protected static String node;
-    protected static String platform;
+    protected static String oPlatform;
 
     public static void createInstance(String browserName, String browserVersion, String platform) {
         browserName = (browserName != null) ? browserName : "chrome";
-
+        oPlatform = platform;
         setDesiredCapabilities(browserName);//set browser capabilities
 
         if (Constant.GRID_MODE.equals("on")) {
@@ -80,9 +80,8 @@ public class DriverFactory {
     /**
      * Set Drivers Location System Properties
      */
-    private static void setPlatform(String platform_) {
-        platform = platform_;
-        switch (platform_) {
+    private static void setPlatform(String platform) {
+        switch (platform) {
             case "windows":
                 capability.setPlatform(Platform.WINDOWS);
                 break;
@@ -179,15 +178,15 @@ public class DriverFactory {
         URL driverLocation = Constant.class.getClassLoader().getResource("drivers/");
         switch (browserName) {
             case "chrome":
-                if (platform.equals("windows"))
+                if (oPlatform.equals("windows"))
                     System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver.exe");
-                else if (platform.equals("linux"))
+                else if (oPlatform.equals("linux"))
                     System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver");
                 break;
             case "firefox":
-                if (platform.equals("windows"))
+                if (oPlatform.equals("windows"))
                     System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver.exe");
-                else if (platform.equals("linux"))
+                else if (oPlatform.equals("linux"))
                     System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver");
                 break;
             default:

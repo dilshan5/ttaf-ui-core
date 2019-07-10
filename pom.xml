@@ -116,7 +116,7 @@
     </distributionManagement>
     <ciManagement>
         <system>jenkins</system>
-        <url>http://35.229.56.169:8080/jenkins</url>
+        <url>http://34.93.165.71:8080/jenkins</url>
         <notifiers>
             <notifier>
                 <type>mail</type>
