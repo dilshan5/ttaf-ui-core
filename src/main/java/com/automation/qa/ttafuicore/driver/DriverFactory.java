@@ -189,6 +189,9 @@ public class DriverFactory {
                 else if (oPlatform.equals("linux"))
                     System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver");
                 break;
+            case "ie":
+                    System.setProperty("webdriver.ie.driver", driverLocation.getPath() + "IEDriverServer.exe");
+                break;
             default:
                 LOGGER.info("TTAF MESSAGE: Failed to  Set the driver locations");
                 System.exit(1);
