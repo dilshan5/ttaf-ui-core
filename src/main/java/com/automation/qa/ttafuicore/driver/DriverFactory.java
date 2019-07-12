@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -70,6 +71,9 @@ public class DriverFactory {
                 break;
             case "ie":
                 DriverManager.driver.set(new InternetExplorerDriver(capability));
+                break;
+            case "edge":
+                DriverManager.driver.set(new EdgeDriver(capability));
                 break;
             default:
                 DriverManager.driver.set(new ChromeDriver(capability));
@@ -163,6 +167,9 @@ public class DriverFactory {
                 capability.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, false);
                 capability.setCapability(InternetExplorerDriver.NATIVE_EVENTS, false);
                 break;
+            case "edge":
+                capability = DesiredCapabilities.edge();
+                break;
             default:
                 LOGGER.error("TTAF MESSAGE: Failed to set Browser Capabilities.");
                 System.exit(1);
@@ -191,6 +198,9 @@ public class DriverFactory {
                 break;
             case "ie":
                     System.setProperty("webdriver.ie.driver", driverLocation.getPath() + "IEDriverServer.exe");
+                break;
+            case "edge":
+                System.setProperty("webdriver.edge.driver", driverLocation.getPath() + "MicrosoftWebDriver.exe");
                 break;
             default:
                 LOGGER.info("TTAF MESSAGE: Failed to  Set the driver locations");
