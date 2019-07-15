@@ -9,6 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -33,16 +34,14 @@ public class DriverFactory {
         browserName = (browserName != null) ? browserName : "chrome";
         oPlatform = platform;
         setDesiredCapabilities(browserName);//set browser capabilities
+        setPlatform(platform);// set the running platform
+        setBrowserName(browserName); //set browser name
+        capability.setVersion(browserVersion);
 
         if (Constant.GRID_MODE.equals("on")) {
-            setPlatform(platform);// set the running platform
-            if (browserName.equalsIgnoreCase("ie"))
-                capability.setBrowserName("internet explorer");//In the Selenium Grid ie refer as internet explorer
-            else
-                capability.setBrowserName(browserName);
 
             node = Constant.hubURL;
-            capability.setVersion(browserVersion);
+
             try {
                 DriverManager.driver.set(new RemoteWebDriver(new URL(node), capability));
                 LOGGER.info("Selenium Grid is: " + Constant.GRID_MODE);
@@ -56,6 +55,26 @@ public class DriverFactory {
             createLocalInstance(browserName);
         }
         setWebDriver();
+    }
+
+    private static void setBrowserName(String browserName) {
+        switch (browserName) {
+            case "chrome":
+                capability.setBrowserName(BrowserType.CHROME);
+                break;
+            case "firefox":
+                capability.setBrowserName(BrowserType.FIREFOX);
+                break;
+            case "safari":
+                capability.setBrowserName(BrowserType.SAFARI);
+                break;
+            case "ie":
+                capability.setBrowserName("internet explorer");//In the Selenium Grid ie refer as internet explorer
+                break;
+            case "edge":
+                capability.setBrowserName(BrowserType.EDGE);
+                break;
+        }
     }
 
     private static void createLocalInstance(String browserName) {
@@ -169,6 +188,9 @@ public class DriverFactory {
                 break;
             case "edge":
                 capability = DesiredCapabilities.edge();
+                capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+                capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+                capability.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT , true);
                 break;
             default:
                 LOGGER.error("TTAF MESSAGE: Failed to set Browser Capabilities.");
