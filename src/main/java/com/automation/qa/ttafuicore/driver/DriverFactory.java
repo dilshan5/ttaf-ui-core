@@ -191,6 +191,7 @@ public class DriverFactory {
                 capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
                 capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
                 capability.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT , true);
+                capability.setCapability(CapabilityType.PAGE_LOAD_STRATEGY,"eager");
                 break;
             default:
                 LOGGER.error("TTAF MESSAGE: Failed to set Browser Capabilities.");
