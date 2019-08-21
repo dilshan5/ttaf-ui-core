@@ -6,9 +6,6 @@ import com.automation.qa.ttafuicore.util.Constant;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
-import org.testng.internal.BaseTestMethod;
-
-import java.lang.reflect.Field;
 import java.util.logging.Logger;
 
 
