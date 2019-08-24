@@ -176,6 +176,7 @@ public class DriverFactory {
                 capability = DesiredCapabilities.internetExplorer();
                 //"Enhanced Protected Mode" must be disabled for IE 10 and higher
                 capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+                capability.setCapability("ignoreProtectedModeSettings", true);
                 capability.setCapability("requireWindowFocus", true);
                 capability.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, true);
                 capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
