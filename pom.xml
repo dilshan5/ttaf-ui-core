@@ -9,6 +9,7 @@
     <version>1.0.7-SNAPSHOT</version>
     <properties>
         <!-- github server corresponds to entry in ~/.m2/settings.xml -->
+
         <github.global.server>github</github.global.server>
     </properties>
     <dependencies>
