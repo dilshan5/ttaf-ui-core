@@ -14,7 +14,7 @@ public class WebDriverListener implements IInvokedMethodListener {
 
     @Override
     public void beforeInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
-        LOGGER.info("TTAF MESSAGE:BEGIN::: com.automation.qa.ttafuicore.listener.WebDriverListener.beforeInvocation");
+        LOGGER.info("TTAF MESSAGE:BEGIN: com.automation.qa.ttafuicore.listener.WebDriverListener.beforeInvocation");
         if (iInvokedMethod.isTestMethod()) {
             // get browser name specified in the TestNG XML test suite file
             String browserName = iInvokedMethod.getTestMethod().getXmlTest().getLocalParameters().get("browserName");
@@ -32,7 +32,7 @@ public class WebDriverListener implements IInvokedMethodListener {
         } else {
             LOGGER.info("TTAF MESSAGE: TTAF Provided method is NOT a TestNG testMethod!!!");
         }
-        LOGGER.info("TTAF MESSAGE:END::: com.automation.qa.ttafuicore.listener.WebDriverListener.beforeInvocation");
+        LOGGER.info("TTAF MESSAGE:END: com.automation.qa.ttafuicore.listener.WebDriverListener.beforeInvocation");
     }
 
     @Override
