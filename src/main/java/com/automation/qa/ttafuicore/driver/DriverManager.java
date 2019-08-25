@@ -14,6 +14,7 @@ public class DriverManager {
     /*
 This simple line does all the multi thread magic.
 For more details please refer to the src link above :)
+Add
 */
     public static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<RemoteWebDriver>();
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(DriverManager.class));
