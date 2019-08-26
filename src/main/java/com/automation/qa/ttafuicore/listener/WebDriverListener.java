@@ -1,6 +1,5 @@
 package com.automation.qa.ttafuicore.listener;
 
-import com.automation.qa.ttafuicore.driver.DriverManager;
 import com.automation.qa.ttafuicore.driver.DriverFactory;
 import com.automation.qa.ttafuicore.util.Constant;
 import org.testng.IInvokedMethod;
