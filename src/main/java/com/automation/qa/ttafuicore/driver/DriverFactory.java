@@ -15,6 +15,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -102,7 +103,6 @@ public class DriverFactory {
 
     /**
      * Set Drivers Location System Properties
-     *
      */
     private static void setPlatform(String platform) {
         switch (platform) {
@@ -191,9 +191,9 @@ public class DriverFactory {
             case "edge":
                 capability = DesiredCapabilities.edge();
                 capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-                capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-                capability.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT , true);
-                capability.setCapability(CapabilityType.PAGE_LOAD_STRATEGY,"eager");
+                capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+                capability.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
+                capability.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "eager");
                 break;
             default:
                 LOGGER.error("TTAF MESSAGE: Failed to set Browser Capabilities.");
@@ -207,25 +207,28 @@ public class DriverFactory {
      * Set Drivers Location System Properties
      */
     private static void setWebDriverLocation(String browserName) {
-        URL driverLocation = Constant.class.getClassLoader().getResource("drivers/");
+        //get the driver location path
+        String driverLocation = "src/test/resources/drivers";
+        File file = new File(driverLocation);
+        String driverLocationPath = file.getAbsolutePath();
         switch (browserName) {
             case "chrome":
                 if (oPlatform.equals("windows"))
-                    System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver", driverLocationPath + "/chromedriver.exe");
                 else if (oPlatform.equals("linux"))
-                    System.setProperty("webdriver.chrome.driver", driverLocation.getPath() + "chromedriver");
+                    System.setProperty("webdriver.chrome.driver", driverLocationPath + "/chromedriver");
                 break;
             case "firefox":
                 if (oPlatform.equals("windows"))
-                    System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver.exe");
+                    System.setProperty("webdriver.gecko.driver", driverLocationPath + "/geckodriver.exe");
                 else if (oPlatform.equals("linux"))
-                    System.setProperty("webdriver.gecko.driver", driverLocation.getPath() + "geckodriver");
+                    System.setProperty("webdriver.gecko.driver", driverLocationPath + "/geckodriver");
                 break;
             case "ie":
-                    System.setProperty("webdriver.ie.driver", driverLocation.getPath() + "IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver", driverLocationPath + "/IEDriverServer.exe");
                 break;
             case "edge":
-                System.setProperty("webdriver.edge.driver", driverLocation.getPath() + "MicrosoftWebDriver.exe");
+                System.setProperty("webdriver.edge.driver", driverLocationPath + "/MicrosoftWebDriver.exe");
                 break;
             default:
                 LOGGER.info("TTAF MESSAGE: Failed to  Set the driver locations");
