@@ -1,7 +1,8 @@
 package com.automation.qa.ttafuicore.driver;
 
 import com.automation.qa.ttafuicore.util.Constant;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * Created by DilshanF on 11/14/2018.
  */
 public class DriverFactory {
-    private static final Logger LOGGER = Logger.getLogger(String.valueOf(DriverFactory.class));
+    private static final Logger LOGGER = LogManager.getLogger(String.valueOf(DriverFactory.class));
 
     protected static DesiredCapabilities capability;
     protected static String node;

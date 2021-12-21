@@ -2,7 +2,8 @@ package com.automation.qa.ttafuicore.driver;
 
 import com.automation.qa.ttafuicore.util.Constant;
 import io.qameta.allure.Allure;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -16,7 +17,7 @@ This simple line does all the multi thread magic.
 For more details please refer to the src link above :)
 */
     public static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<RemoteWebDriver>();
-    private static final Logger LOGGER = Logger.getLogger(String.valueOf(DriverManager.class));
+    private static final Logger LOGGER = LogManager.getLogger(String.valueOf(DriverManager.class));
 
     /***
      *
